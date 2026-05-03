@@ -1,10 +1,8 @@
 
-
 public class Conta {
 	//atributos
 	private String nome;
 	private int num_conta;
-	private int num_ag;
 	private double saldo=0;
 	
 	
@@ -16,9 +14,6 @@ public class Conta {
 		return num_conta;
 	}
 
-	public int getNum_ag() {
-		return num_ag;
-	}
 
 	public double getSaldo() {
 		return saldo;
@@ -33,21 +28,26 @@ public class Conta {
 	}
 	
 	
-	public Conta(String nome, int num_conta, int num_ag, double saldo) {
+	public Conta(String nome, int num_conta, double saldo) {
 		super();
 		this.nome = nome;
 		this.num_conta = num_conta;
-		this.num_ag = num_ag;
 		this.saldo = saldo;
 	}
 
 	public void depositar(double valor) {
+		saldo = saldo+valor;
 		
 	}
 	
-	public void sacar(double valor) {
+	public boolean sacar(double valor) {
+		if(saldo<valor) {
+			return false;
+		}else {
+			saldo = saldo - valor;
+			return true;
+		}
 	
-		
 	}
 	
 
