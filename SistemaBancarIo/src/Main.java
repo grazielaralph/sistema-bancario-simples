@@ -5,7 +5,7 @@ public class Main {
 	static ArrayList<Conta> contasBancarias = new ArrayList<>();
 	
 	//metodos da main
-	public void CriarConta(String nome, int numConta, double saldo) {
+	public void criarConta(String nome, int numConta, double saldo) {
 		if(verificaConta(numConta)) {
 			System.out.println("Já existe uma conta com esse ID! Tente novamente");
 		}else {
