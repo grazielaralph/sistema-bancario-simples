@@ -23,10 +23,13 @@ public class Conta {
 		this.saldo = saldo;
 	}
 
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	public Conta() {
 		// TODO Auto-generated constructor stub
 	}
-	
 	
 	public Conta(String nome, int num_conta, double saldo) {
 		super();
@@ -47,8 +50,5 @@ public class Conta {
 			saldo = saldo - valor;
 			return true;
 		}
-	
 	}
-	
-
 }

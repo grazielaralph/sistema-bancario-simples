@@ -8,17 +8,30 @@ public class Banco {
 		contas = new ArrayList<>();
 	}
 
-	public void AdicionarConta(Conta conta) {
+	public void adicionarConta(Conta conta) {
 		contas.add(conta);
 	}
 
-	public Conta ConsultarConta(int num_conta){
+	public Conta consultarConta(int num_conta){
 		for (Conta c: contas){
-			if (c.getnum_conta() == num_conta){ //
+			if (c.getNum_conta() == num_conta){ //
 				return c;
 			}
 		}
 		return null;
 	}
-}
+	
+	public boolean tranferir(int origem, int destino, double valor){
+		Conta contaOrigem = consultarConta(origem);
+	    Conta contaDestino = consultarConta(destino);
 
+	    if(contaOrigem == null || contaDestino == null){
+		   return false;
+	    }
+	    if (contaOrigem.sacar(valor)) {
+			contaDestino.depositar(valor);
+			return true;
+        }
+		return false;
+    }
+}
