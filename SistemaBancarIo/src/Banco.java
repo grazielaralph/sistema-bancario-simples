@@ -34,4 +34,27 @@ public class Banco {
         }
 		return false;
     }
+	
+	public void depositar(int numConta, double valor) {
+		Conta c = consultarConta(numConta);
+		if(c!=null) {
+			c.depositar(valor);			
+		}else {
+			System.out.println("Conta nao encontrada! Tente novamente");
+		}
+	}
+	
+	public boolean sacar(int numConta, double valor) {
+		Conta c = consultarConta(numConta);
+		if(c!=null) {
+			if(c.sacar(valor)) {
+				return true;
+			}else {
+				return false;
+			}
+		}else {
+			System.out.println("Conta nao encontrada! Tente novamente");
+			return false;
+		}
+	}
 }
