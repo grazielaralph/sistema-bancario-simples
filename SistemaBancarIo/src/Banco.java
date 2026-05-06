@@ -8,9 +8,9 @@ public class Banco {
 		contas = new ArrayList<>();
 	}
 
-	public void adicionarConta(Conta conta) {
-		contas.add(conta);
-	}
+	public void adicionarConta(String nome, double saldo) {
+			contas.add(new Conta(nome, 0, saldo));
+		}
 
 	public Conta consultarConta(int num_conta){
 		for (Conta c: contas){
