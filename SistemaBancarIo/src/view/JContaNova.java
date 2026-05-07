@@ -15,8 +15,8 @@ public class JContaNova extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField tfNome;
+	private JTextField tfSaldo;
 
 	/**
 	 * Launch the application.
@@ -33,11 +33,10 @@ public class JContaNova extends JFrame {
 				}
 			}
 		});
+		
+		
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public JContaNova() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 331, 404);
@@ -53,31 +52,35 @@ public class JContaNova extends JFrame {
 		lblNewLabel.setBounds(77, 25, 210, 46);
 		contentPane.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(63, 116, 196, 24);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		tfNome = new JTextField();
+		tfNome.setBounds(63, 116, 196, 24);
+		contentPane.add(tfNome);
+		tfNome.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(63, 205, 196, 24);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		tfSaldo = new JTextField();
+		tfSaldo.setBounds(63, 205, 196, 24);
+		contentPane.add(tfSaldo);
+		tfSaldo.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Nome:");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_1.setBounds(63, 94, 44, 12);
-		contentPane.add(lblNewLabel_1);
+		JLabel lblNome = new JLabel("Nome");
+		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNome.setBounds(63, 94, 44, 12);
+		contentPane.add(lblNome);
 		
-		JLabel lblNewLabel_2 = new JLabel("Numero da Conta Nova");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_2.setBounds(63, 182, 196, 12);
-		contentPane.add(lblNewLabel_2);
+		JLabel lblSaldo = new JLabel("Saldo");
+		lblSaldo.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblSaldo.setBounds(63, 182, 196, 12);
+		contentPane.add(lblSaldo);
 		
-		JButton btnNewButton = new JButton("Confirmar");
-		btnNewButton.setForeground(new Color(230, 230, 250));
-		btnNewButton.setBackground(new Color(0, 128, 128));
-		btnNewButton.setBounds(103, 275, 110, 24);
-		contentPane.add(btnNewButton);
+		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.setForeground(new Color(230, 230, 250));
+		btnConfirmar.setBackground(new Color(0, 128, 128));
+		btnConfirmar.setBounds(103, 275, 110, 24);
+		contentPane.add(btnConfirmar);
+		
+		
+		
+		
 
 	}
 
