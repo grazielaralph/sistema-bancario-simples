@@ -9,6 +9,9 @@ public class Main {
 		Banco banco = new Banco();
 
 		int opcao = 0;
+		int num_conta=0;
+		String nome;
+		double valor;
 
 		while (opcao != 6) {
 
@@ -25,23 +28,22 @@ public class Main {
 			opcao = entrada.nextInt();
 
 			System.out.println();
-
-			if (opcao == 1) {
+			
+			switch(opcao) {
+			case 1:
 				entrada.nextLine();
 
 				System.out.print("Nome completo do titular da conta: ");
-				String nome = entrada.nextLine();
+				nome = entrada.nextLine();
 
 				System.out.print("Saldo inicial: ");
 				double saldo = entrada.nextDouble();
 
 				banco.criarConta(nome, saldo);
-			}
-
-			else if (opcao == 2) {
-
+				
+			case 2:
 				System.out.print("Informe o número da conta: ");
-				int num_conta = entrada.nextInt();
+				num_conta = entrada.nextInt();
 
 				Conta conta = banco.consultarConta(num_conta);
 
@@ -56,33 +58,22 @@ public class Main {
 
 					System.out.println("Conta não encontrada! :( ");
 				}
-			}
-
-			else if (opcao == 3) {
-
+				
+			case 3:
 				System.out.print("Informe o número da conta: ");
-				int num_conta = entrada.nextInt();
+				num_conta = entrada.nextInt();
 
 				System.out.print("Qual valor deseja depositar? ");
-				double valor = entrada.nextDouble();
+				valor = entrada.nextDouble();
 
-				if (banco.depositar(num_conta, valor)) {
-
-					System.out.println("Depósito realizado com sucesso!");
-
-				} else {
-
-					System.out.println("Não foi possível realizar o depósito!");
-				}
-			}
-
-			else if (opcao == 4) {
-
+				banco.depositar(num_conta, valor);
+				
+			case 4:
 				System.out.print("Informe o número da conta: ");
-				int num_conta = entrada.nextInt();
+				num_conta = entrada.nextInt();
 
 				System.out.print("Qual valor deseja sacar? ");
-				double valor = entrada.nextDouble();
+				valor = entrada.nextDouble();
 
 				if (banco.sacar(num_conta, valor)) {
 					System.out.println("Saque realizado com sucesso!");
@@ -91,10 +82,8 @@ public class Main {
 
 					System.out.println("Não foi possível realizar o saque!");
 				}
-			}
-
-			else if (opcao == 5) {
-
+				
+			case 5:
 				System.out.print("Informe o número da conta de origem: ");
 				int origem = entrada.nextInt();
 
@@ -102,7 +91,7 @@ public class Main {
 				int destino = entrada.nextInt();
 
 				System.out.print("Informe o valor a ser transferido: ");
-				double valor = entrada.nextDouble();
+				valor = entrada.nextDouble();
 
 				if (banco.transferir(origem, destino, valor)) {
 
@@ -112,21 +101,18 @@ public class Main {
 
 					System.out.println("Não foi possível realizar a transferência!");
 				}
-			}
-
-			else if (opcao == 6) {
-
+				
+			case 6:
 				System.out.println("Obrigado por usar o JaBank!");
 				System.out.println("Encerrando sistema...");
-			}
-
-			else {
-
+				
+			default:
 				System.out.println("Opção inválida! Tente novamente.");
-			}
-		}
+				}
 
+			
 		entrada.close();
+		}
 	}
 }
 

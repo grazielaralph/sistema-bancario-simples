@@ -38,7 +38,7 @@ class Conta {
 		System.out.println("Saldo: " + saldo);
 	}
 
-	public boolean sacar(int num_conta, double valor) {
+	public boolean sacar(double valor) {
 		if (saldo < valor) {
 			return false;
 		}
