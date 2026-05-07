@@ -1,12 +1,21 @@
+class Conta {
 
-public class Conta {
-	//atributos
 	private String nome;
+	private double saldo;
 	private int num_conta;
-	private double saldo=0;
-	private static int cont=0;
-	
-	
+
+	private static int cont = 0;
+
+	// construtor
+	public Conta(String nome, double saldo) {
+
+		this.nome = nome;
+		this.saldo = saldo;
+
+		cont++;
+		this.num_conta = cont;
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -15,43 +24,21 @@ public class Conta {
 		return num_conta;
 	}
 
-
 	public double getSaldo() {
 		return saldo;
 	}
 
-	public void setSaldo(double saldo) {
-		this.saldo = saldo;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public Conta() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	public Conta(String nome, int num_conta, double saldo) {
-		super();
-		this.nome = nome;
-		this.saldo = saldo;
-		
-		cont++; //toda vez que criarmos um objeto novo, será incrementado uma posicao
-		this.num_conta = cont;
-	}
-
 	public void depositar(double valor) {
-		saldo = saldo+valor;
-		
+		saldo += valor;
 	}
-	
+
 	public boolean sacar(double valor) {
-		if(saldo<valor) {
+
+		if (saldo < valor) {
 			return false;
-		}else {
-			saldo = saldo - valor;
-			return true;
 		}
+
+		saldo -= valor;
+		return true;
 	}
 }
