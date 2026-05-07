@@ -1,8 +1,8 @@
 class Conta {
 
-	private String nome;
+    String nome;
 	private double saldo;
-	private int num_conta;
+	int num_conta;
 
 	private static int cont = 0;
 
@@ -32,8 +32,13 @@ class Conta {
 		saldo += valor;
 	}
 
-	public boolean sacar(double valor) {
+	public void mostrarDados(){
+		System.out.println("Nome do titular: " + nome);
+		System.out.println("Número da conta: " + num_conta);
+		System.out.println("Saldo: " + saldo);
+	}
 
+	public boolean sacar(int num_conta, double valor) {
 		if (saldo < valor) {
 			return false;
 		}
