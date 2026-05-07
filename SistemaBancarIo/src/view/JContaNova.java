@@ -18,9 +18,6 @@ public class JContaNova extends JFrame {
 	private JTextField tfNome;
 	private JTextField tfSaldo;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

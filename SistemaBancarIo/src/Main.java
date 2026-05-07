@@ -40,6 +40,7 @@ public class Main {
 				double saldo = entrada.nextDouble();
 
 				banco.criarConta(nome, saldo);
+				break;
 				
 			case 2:
 				System.out.print("Informe o número da conta: ");
@@ -58,7 +59,7 @@ public class Main {
 
 					System.out.println("Conta não encontrada! :( ");
 				}
-				
+				break;
 			case 3:
 				System.out.print("Informe o número da conta: ");
 				num_conta = entrada.nextInt();
@@ -67,6 +68,7 @@ public class Main {
 				valor = entrada.nextDouble();
 
 				banco.depositar(num_conta, valor);
+				break;
 				
 			case 4:
 				System.out.print("Informe o número da conta: ");
@@ -82,7 +84,7 @@ public class Main {
 
 					System.out.println("Não foi possível realizar o saque!");
 				}
-				
+				break;
 			case 5:
 				System.out.print("Informe o número da conta de origem: ");
 				int origem = entrada.nextInt();
@@ -101,17 +103,17 @@ public class Main {
 
 					System.out.println("Não foi possível realizar a transferência!");
 				}
+				break;
 				
 			case 6:
 				System.out.println("Obrigado por usar o JaBank!");
 				System.out.println("Encerrando sistema...");
+				break;
 				
 			default:
 				System.out.println("Opção inválida! Tente novamente.");
 				}
 
-			
-		entrada.close();
 		}
 	}
 }
