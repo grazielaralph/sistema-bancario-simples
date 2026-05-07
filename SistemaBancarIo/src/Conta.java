@@ -4,6 +4,7 @@ public class Conta {
 	private String nome;
 	private int num_conta;
 	private double saldo=0;
+	private static int cont=0;
 	
 	
 	public String getNome() {
@@ -34,8 +35,10 @@ public class Conta {
 	public Conta(String nome, int num_conta, double saldo) {
 		super();
 		this.nome = nome;
-		this.num_conta = num_conta;
 		this.saldo = saldo;
+		
+		cont++; //toda vez que criarmos um objeto novo, será incrementado uma posicao
+		this.num_conta = cont;
 	}
 
 	public void depositar(double valor) {
