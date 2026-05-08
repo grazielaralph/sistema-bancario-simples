@@ -2,9 +2,9 @@ package model;
 
 public class Contax {
 
-    String nome;
+    private String nome;
 	private double saldo;
-	int num_conta;
+	private int num_conta;
 
 	private static int cont = 0;
 
@@ -28,6 +28,10 @@ public class Contax {
 
 	public double getSaldo() {
 		return saldo;
+	}
+
+	public setSaldo(double saldo){
+		this.saldo=saldo;
 	}
 
 	public void depositar(double valor) {
