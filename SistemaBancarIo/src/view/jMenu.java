@@ -15,6 +15,9 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import model.Banco;
+import model.Contax;
+
 public class jMenu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -22,11 +25,15 @@ public class jMenu extends JFrame {
 	private JTextField textFieldUsuario;
 	private JTextField textFieldConta;
 
+	private Banco banco;
+	
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					jMenu frame = new jMenu();
+					Banco banco = new Banco();
+					jMenu frame = new jMenu(banco);
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -36,7 +43,9 @@ public class jMenu extends JFrame {
 		});
 	}
 
-	public jMenu() {
+	public jMenu(Banco banco) {
+		this.banco = banco;
+
 		setBackground(new Color(95, 158, 160));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 719, 511);
@@ -50,8 +59,8 @@ public class jMenu extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBounds(214, 32, 277, 410);
 		panel.setBackground(new Color(176, 196, 222));
-		contentPane.add(panel);
 		panel.setLayout(null);
+		contentPane.add(panel);
 
 		JLabel lblNewLabel = new JLabel("Bem-vindo ao Banco do Brasil!!");
 		lblNewLabel.setFont(new Font("Times New Roman", Font.ITALIC, 16));
@@ -78,7 +87,8 @@ public class jMenu extends JFrame {
 
 		JComboBox<String> comboBox = new JComboBox<>();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Acessar Conta", "Transferencia", "Saque", "Depositar"}));
+		comboBox.setModel(new DefaultComboBoxModel<>(
+				new String[] { "Acessar Conta", "Transferencia", "Saque", "Depositar" }));
 		comboBox.setBounds(69, 195, 132, 20);
 		panel.add(comboBox);
 
@@ -92,46 +102,66 @@ public class jMenu extends JFrame {
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				String itemSelecionado = comboBox.getSelectedItem().toString();
+				if (textFieldUsuario.getText().isEmpty() ||
+						textFieldConta.getText().isEmpty()) {
 
-				if (!textFieldUsuario.getText().isEmpty() &&
-					!textFieldConta.getText().isEmpty()) {
-
-					switch (itemSelecionado) { 
-					
-					case "Acessar Conta":
-						JPrincipal jPrincipal = new JPrincipal();
-						jPrincipal.setLocationRelativeTo(null);
-						jPrincipal.setVisible(true);
-						break;
-						
-					case "Saque":
-						JSacar jSacar = new JSacar();
-						jSacar.setLocationRelativeTo(null);
-						jSacar.setVisible(true);
-						break;
-						
-					
-					case"Transferencia":
-						JTrans jTrans = new JTrans();
-						jTrans.setLocationRelativeTo(null);
-						jTrans.setVisible(true);
-						break;
-						
-					case"Depositar":
-						JDepositar jDepositar = new JDepositar();
-						jDepositar.setLocationRelativeTo(null);
-						jDepositar.setVisible(true);
-						break;
-					}
-
-				} else {
 					JOptionPane.showMessageDialog(
 							null,
 							"Informações inválidas",
 							"Aviso",
-							JOptionPane.WARNING_MESSAGE
-					);
+							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				int numConta;
+
+				try {
+					numConta = Integer.parseInt(textFieldConta.getText());
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(
+							null,
+							"Número da conta inválido",
+							"Erro",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				Contax conta = banco.consultarConta(numConta);
+				if (conta == null) {
+					JOptionPane.showMessageDialog(
+							null,
+							"Conta não encontrada",
+							"Erro",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				String opcao = comboBox.getSelectedItem().toString();
+
+				switch (opcao) {
+
+				case "Acessar Conta":
+					JPrincipal jPrincipal = new JPrincipal(banco, numConta);
+					jPrincipal.setLocationRelativeTo(null);
+					jPrincipal.setVisible(true);
+					break;
+
+				case "Saque":
+					JSacar jSacar = new JSacar(banco, numConta);
+					jSacar.setLocationRelativeTo(null);
+					jSacar.setVisible(true);
+					break;
+
+				case "Transferencia":
+					JTrans jTrans = new JTrans(banco, numConta);
+					jTrans.setLocationRelativeTo(null);
+					jTrans.setVisible(true);
+					break;
+
+				case "Depositar":
+					JDepositar jDepositar = new JDepositar(banco, numConta);
+					jDepositar.setLocationRelativeTo(null);
+					jDepositar.setVisible(true);
+					break;
 				}
 			}
 		});
@@ -146,7 +176,7 @@ public class jMenu extends JFrame {
 		btnCriar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				JContaNova jContaNova = new JContaNova();
+				JContaNova jContaNova = new JContaNova(banco);
 				jContaNova.setLocationRelativeTo(null);
 				jContaNova.setVisible(true);
 			}

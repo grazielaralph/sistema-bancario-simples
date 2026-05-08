@@ -1,70 +1,94 @@
 package view;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import model.Banco;
 
 public class JTrans extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textValor;
+	private JTextField textContaDestino;
+	private JTextField textSaldo;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+	private Banco banco;
+	private int numConta;
+
+	public JTrans(Banco banco, int numConta) {
+		this.banco = banco;
+		this.numConta = numConta;
+
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
+		setContentPane(contentPane);
+
+		JLabel lblSaldo = new JLabel("Saldo da Conta:");
+		lblSaldo.setBounds(20, 30, 150, 20);
+		contentPane.add(lblSaldo);
+
+		textSaldo = new JTextField();
+		textSaldo.setBounds(150, 30, 120, 20);
+		textSaldo.setEditable(false);
+		contentPane.add(textSaldo);
+
+		JLabel lblConta = new JLabel("Número da conta destino:");
+		lblConta.setBounds(150, 70, 200, 20);
+		contentPane.add(lblConta);
+
+		textContaDestino = new JTextField();
+		textContaDestino.setBounds(150, 95, 120, 20);
+		contentPane.add(textContaDestino);
+
+		JLabel lblValor = new JLabel("Valor da transferência:");
+		lblValor.setBounds(150, 130, 200, 20);
+		contentPane.add(lblValor);
+
+		textValor = new JTextField();
+		textValor.setBounds(150, 155, 120, 20);
+		contentPane.add(textValor);
+
+		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.setBounds(160, 200, 110, 25);
+		contentPane.add(btnConfirmar);
+
+		btnConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
 				try {
-					JTrans frame = new JTrans();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+					int contaDestino = Integer.parseInt(textContaDestino.getText());
+					double valor = Double.parseDouble(textValor.getText());
+
+					boolean ok = banco.transferir(numConta, contaDestino, valor);
+
+					if (ok) {
+						JOptionPane.showMessageDialog(null, "Transferência realizada!");
+					} else {
+						JOptionPane.showMessageDialog(null, "Erro na transferência!");
+					}
+
+					jMenu tela = new jMenu(banco);
+					tela.setLocationRelativeTo(null);
+					tela.setVisible(true);
+					dispose();
+
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "Dados inválidos!");
 				}
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
-	public JTrans() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		JLabel lblSaldoDaConta = new JLabel("Saldo da Conta:");
-		lblSaldoDaConta.setBounds(34, 42, 196, 36);
-		contentPane.add(lblSaldoDaConta);
-		
-		JLabel lblNewLabel_1 = new JLabel("Insira o valor da Transferencia ");
-		lblNewLabel_1.setBounds(138, 104, 144, 28);
-		contentPane.add(lblNewLabel_1);
-		
-		textField = new JTextField();
-		textField.setBounds(148, 142, 134, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
-		JButton btnNewButton = new JButton("Confirmar");
-		btnNewButton.setBounds(165, 180, 105, 20);
-		contentPane.add(btnNewButton);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(112, 51, 105, 18);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
-
-	}
-
 }
