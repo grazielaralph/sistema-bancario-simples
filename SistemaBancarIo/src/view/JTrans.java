@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import model.Banco;
+import model.Contax;
 
 public class JTrans extends JFrame {
 
@@ -42,6 +43,8 @@ public class JTrans extends JFrame {
 
 		textSaldo = new JTextField();
 		textSaldo.setBounds(150, 30, 120, 20);
+		Contax c = banco.consultarConta(numConta);
+		textSaldo.setText("R$ "+c.getSaldo());
 		textSaldo.setEditable(false);
 		contentPane.add(textSaldo);
 

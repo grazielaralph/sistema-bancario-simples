@@ -30,7 +30,7 @@ public class Contax {
 		return saldo;
 	}
 
-	public setSaldo(double saldo){
+	public void setSaldo(double saldo){
 		this.saldo=saldo;
 	}
 
